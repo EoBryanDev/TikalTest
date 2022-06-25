@@ -7,7 +7,7 @@
       </div>
       <div>
         <router-link to="/login" class="btn btn-secondary actionButtons">Login</router-link>
-        <a class="btn btn-info actionButtons">Saiba Mais</a>
+        <a href="https://www.tikal.tech" class="btn btn-info actionButtons">Conheça-nos mais </a>
       </div>
 
       <div

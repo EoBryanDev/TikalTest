@@ -1,5 +1,5 @@
 <template>
-  <div class="login ">
+  <div class="login">
     <NavBar />
     <section class="vh-100 ">
       <div class="container-fluid ">
@@ -8,25 +8,25 @@
             <div
               class="d-flex align-items-center p-5 m-4"
             >
-              <form @submit="handleSubmit()" class="loginForm">
+              <form @submit.prevent="handleSubmit" class="loginForm">
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
                   Login
                 </h3>
 
                 <div class="form-outline mb-4">
                   <input
-                    v-model="user.email"
+                    v-model="user"
                     type="email"
                     class="form-control form-control-lg"
                   />
                   <label class="form-label" for="form2Example18"
-                    >Email address</label
+                    >User</label
                   >
                 </div>
 
                 <div class="form-outline mb-4">
                   <input
-                    v-model="user.password"
+                    v-model="pwd"
                     type="password"
                     class="form-control form-control-lg"
                   />
@@ -36,11 +36,11 @@
                 </div>
 
                 <div class="pt-1 mb-4">
-                  <button class="btn btn-info btn-lg btn-block" type="button">
+                  <button class="btn btn-info btn-lg btn-block">
                     Login
                   </button>
                 </div>
-                {{user.email}} {{user.password}}
+                {{user}} {{pwd}}
               </form>
             </div>
           </div>
@@ -61,6 +61,7 @@
 
 <script>
 import NavBar from "../NavBar";
+import axios from 'axios'
 /* eslint-disable */
 export default {
   name: "Login",
@@ -69,15 +70,21 @@ export default {
   },
   data(){
     return{
-      user : {
-        email: '',
-        password: '',
-      },
+        user: '',
+        pwd: '',
     }
   },
   methods: {
-    handleSubmit(){
-      console.log('oi')
+    async handleSubmit(){
+      const data = {
+        user : this.user,
+        pwd : this.pwd
+      }
+      
+      const response = await axios.post('login', data)
+      console.log(response)
+
+      localStorage.setItem('token', response.data.token)
     }
   }
 };
