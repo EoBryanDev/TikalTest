@@ -1,10 +1,12 @@
 <template>
   <div>
-      <Home />   
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
+
 import Home from "./components/Home/Home";
 export default {
   name: "App",
@@ -14,6 +16,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>
