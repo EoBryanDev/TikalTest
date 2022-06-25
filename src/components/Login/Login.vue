@@ -40,7 +40,6 @@
                     Login
                   </button>
                 </div>
-                {{user}} {{pwd}}
               </form>
             </div>
           </div>
@@ -86,10 +85,7 @@ export default {
 
       console.log(response)
       localStorage.setItem('token', response.data.token)
-      
-
-
-      //this.$router.push('/index')
+      this.$router.push('/index')
     }
   }
 };
