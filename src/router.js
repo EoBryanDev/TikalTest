@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from './components/Home/Home'
 import Login from './components/Login/Login'
 import Index from './components/Index/Index'
+import CrudForm from './components/Index/CrudForm/CrudForm'
 
 const routes = [
     {
@@ -21,7 +22,13 @@ const routes = [
       path: '/index',
       name: 'IndexPage',
       component: Index
-    }
+    },
+    {
+      path: '/create',
+      name: 'CreatePage',
+      component: CrudForm
+    },
+
 ]
 
 const router = createRouter({

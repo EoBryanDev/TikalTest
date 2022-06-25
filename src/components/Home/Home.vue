@@ -59,7 +59,7 @@ export default {
   name: "Home",
   components: {
     NavBar,
-  },
+  },  
 };
 </script>
 

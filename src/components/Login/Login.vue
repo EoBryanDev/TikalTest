@@ -46,7 +46,7 @@
           </div>
           <div class="col-sm-6 p-0 m-0 d-none d-sm-block">
             <img
-              src="https://images.pexels.com/photos/2887582/pexels-photo-2887582.jpeg?cs=srgb&dl=pexels-mario-cuadros-2887582.jpg&fm=jpg"
+              src="../../assets/tikal_tech_loginBackground.jpg"
               alt="Login image"
               class="w-100 vh-100"
               style="object-fit: cover; object-position: left"
@@ -76,15 +76,20 @@ export default {
   },
   methods: {
     async handleSubmit(){
+
       const data = {
         user : this.user,
         pwd : this.pwd
       }
       
       const response = await axios.post('login', data)
-      console.log(response)
 
+      console.log(response)
       localStorage.setItem('token', response.data.token)
+      
+
+
+      //this.$router.push('/index')
     }
   }
 };
