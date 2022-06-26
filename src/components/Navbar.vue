@@ -19,15 +19,27 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="form-inline navbar-nav ml-auto mr-4">
+      <ul class="form-inline navbar-nav ml-auto mr-4" v-if="!users">
         <li class="nav-item active">
-          <router-link to="/" class="nav-link text-white" href="#"
+          <router-link to="/" class="nav-link text-white" 
             >Home <span class="sr-only">(current)</span></router-link
           >
         </li>
         <li class="nav-item mr-sm-2">
-          <router-link to="/login" class="nav-link text-white" href="#"
+          <router-link to="/login" class="nav-link text-white" 
             >Login</router-link
+          >
+        </li>
+      </ul>
+      <ul class="form-inline navbar-nav ml-auto mr-4" v-if="users">
+        <li class="nav-item">
+          <router-link to="/index" class="nav-link text-white"
+            >Operações <span class="sr-only">(current)</span></router-link
+          >
+        </li>
+        <li class="nav-item">
+          <a @click="handleClick" href="javascript:void(0)" class="nav-link text-white"
+            >Logout <span class="sr-only">(current)</span></a
           >
         </li>
       </ul>
@@ -39,6 +51,13 @@
 /* eslint-disable */
 export default {
   name: "NavBar",
+  props: ['users'],
+  methods: {
+    handleClick(){
+      localStorage.removeItem('token')
+      this.$router.push('/')
+    }
+  }
 };
 </script>
 

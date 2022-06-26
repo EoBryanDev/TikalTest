@@ -52,14 +52,13 @@
   </div>
 </template>
 <script>
-import NavBar from "../NavBar";
 /* eslint-disable */
-
+import NavBar from '../NavBar'
 export default {
   name: "Home",
   components: {
-    NavBar,
-  },  
+    NavBar
+  }
 };
 </script>
 

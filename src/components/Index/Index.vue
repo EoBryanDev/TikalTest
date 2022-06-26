@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Navbar />
+    <NavBar :users="users"/>
     <div class="container-fluid mt-4">
       <div class="row">
-        <div class="col-md-6" v-if="users">
-          <h2 class="display-4">Clientes disponíveis</h2>
+        <div class="col-md-12" v-if="users">
+          <h2 class="display-4">Lista de Clientes</h2>
           <hr />
           <table class="table">
             <thead class="thead-dark">
@@ -31,6 +31,7 @@
                     class="btn btn-warning mr-1"
                     data-toggle="modal"
                     data-target="#editModal"
+                    @click.prevent="recoverData(user)"
                   >
                     Edit
                   </button>
@@ -111,23 +112,9 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          Are you sure to update the data?
+                          <Update :dataToUpdate="currentUser" />
                         </div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                          >
-                            Return
-                          </button>
-                          <button
-                            @click="clickEditHandler(user)"
-                            class="btn btn-warning"
-                          >
-                            Update
-                          </button>
-                        </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -136,18 +123,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col-md-6 mt-4" v-if="users">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Name: {{curretUser.name}}</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Email: {{curretUser.email}}</li>
-              <li class="list-group-item">Mobile: {{curretUser.mobile}} </li>
-              <li class="list-group-item">Create date:  {{curretUser.createdAt}}</li>
-            </ul>
-          </div>
-        </div>
+        
         <div class="col-md-12" v-if="!users">
           <h1 class="display-1">You're not authenticated!</h1>
         </div>
@@ -157,59 +133,61 @@
 </template>
 
 <script>
-import Navbar from "../NavBar.vue";
+import NavBar from '../NavBar'
+import Update from './CrudModal/Update'
 import axios from "axios";
-//import jwt_decode from 'jwt-decode'
 export default {
   name: "IndexPage",
   components: {
-    Navbar,
+    NavBar,
+    Update
   },
   data() {
     return {
-      users: null,
-      curretUser: {
-        name: '',
-        email: '',
-        mobile: '',
-        createdAt: '',
-        updatedAt: '',
+        users: null,
+        currentUser: {
+            id: '',
+            name: '',
+            email: '',
+            mobile: '',
+            createdAt: '',
+            updatedAt: '',
       }
     };
   },
   methods: {
+    recoverData(user){
+        this.currentUser.id = user.id
+        this.currentUser.name = user.name
+        this.currentUser.email = user.email
+        this.currentUser.mobile = user.mobile
+        this.currentUser.createdAt = user.createdAt
+        this.currentUser.updatedAt = user.updatedAt
+        console.log(this.currentUser)
+    },
     clickDeleteHandler() {
       console.log("deleting... ");
       this.$router.push("/index");
-    },
-    clickEditHandler(client) {
-      console.log(client);
-        const data = {
-            name: client.id,
-            email: client.email,
-            mobile: client.mobile,
-            createdAt: client.createdAt,
-            updatedAt: client.updatedAt,
-        }
-        this.curretUser = data
-    },
+    },   
   },
-  async created() {
-    const response = await axios.get("clientes", {
-      headers: {
-        //token adicionado manualmente ao localstorage quando fiz a requisição de login ("getToken")
-        "x-access-token": localStorage.getItem("token"),
-      },
-    });
-    console.log(response);
-    this.users = response.data[0];
-  },
+  async mounted() {
+    try {
+      const response = await axios.get("clientes", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      });
+      this.users = response.data[0]
+    } catch (err) {
+      console.log(err)
+    }
+  }
 };
 </script>
 
 <style scoped>
 .rep:hover{
-    background-color: rgb(90, 90, 90);
+    background-color: rgb(217, 255, 202);
 
 }
 </style>

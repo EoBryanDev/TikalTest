@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login">   
     <NavBar />
     <section class="vh-100 ">
       <div class="container-fluid ">
@@ -12,10 +12,11 @@
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
                   Login
                 </h3>
-
+                <LoginError v-if="err" :err="err" />
                 <div class="form-outline mb-4">
                   <input
                     v-model="user"
+                    placeholder="Type Email"
                     type="email"
                     class="form-control form-control-lg"
                   />
@@ -27,6 +28,7 @@
                 <div class="form-outline mb-4">
                   <input
                     v-model="pwd"
+                    placeholder="Type Password"
                     type="password"
                     class="form-control form-control-lg"
                   />
@@ -60,32 +62,43 @@
 
 <script>
 import NavBar from "../NavBar";
+import LoginError from "../Login/LoginHandler/LoginError"
 import axios from 'axios'
 /* eslint-disable */
 export default {
   name: "Login",
   components: {
     NavBar,
+    LoginError
   },
   data(){
     return{
         user: '',
         pwd: '',
+        err: ''
     }
   },
   methods: {
     async handleSubmit(){
-
-      const data = {
-        user : this.user,
-        pwd : this.pwd
+      try {
+        const data = {
+          user : this.user,
+          pwd : this.pwd
+        }
+        
+        const response = await axios.post('login', data)
+  
+        console.log(response)
+        localStorage.setItem('token', response.data.token)
+        this.$router.push('/index')       
+      } catch (e) {
+        this.err = 'Invalid Password/Email'
+        setTimeout(()=>{
+          this.user = ''
+          this.pwd = ''
+          this.err=''
+          },1200)
       }
-      
-      const response = await axios.post('login', data)
-
-      console.log(response)
-      localStorage.setItem('token', response.data.token)
-      this.$router.push('/index')
     }
   }
 };
