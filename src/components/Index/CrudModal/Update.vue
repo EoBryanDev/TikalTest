@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="submitUpdateHandler">
+    <form @submit="submitUpdateHandler">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="name">Name</label>
@@ -59,8 +59,6 @@
         Return
       </button>
       <button class="btn btn-warning">Update</button>
-      {{ dataToUpdate }}
-      {{ dataToUpdateForm }}
     </div>
     </form>
   </div>
@@ -81,7 +79,6 @@ export default {
         email: '',
         mobile: '',
         createdAt: '',
-        // updated precisa ser alterado no metodo de submit
         updatedAt: '',
       },
     };

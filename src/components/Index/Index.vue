@@ -24,7 +24,7 @@
                 <td >{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.mobile }}</td>
-                <td>{{ user.createdAt }}</td>
+                <td>{{ user.createdAt}}</td>
                 <td>{{ user.updatedAt }}</td>
                 <td>
                   <button
@@ -36,38 +36,40 @@
                     Edit
                   </button>
                   <button
-                    type="button"
                     class="btn btn-danger"
                     data-toggle="modal"
-                    data-target="#exampleModal"
+                    data-target="#deleteModal"
+                    @click.prevent="setDeleting(user.id,user.name,user.email)"
                   >
                     Delete
                   </button>
                   <!--delete modal-->
                   <div
                     class="modal fade"
-                    id="exampleModal"
+                    id="deleteModal"
                     tabindex="-1"
-                    aria-labelledby="exampleModalLabel"
+                    aria-labelledby="deleteModalLabel"
                     aria-hidden="true"
                   >
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">
+                          <h5 class="modal-title" id="deleteModalLabel">
                             Client Delete
                           </h5>
                           <button
                             type="button"
                             class="close"
                             data-dismiss="modal"
-                            aria-label="Close"
+                            aria-label="Close"           
                           >
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                         <div class="modal-body">
-                          Are you sure to remove the data?
+                          <h3>
+                             Are you sure to remove: {{currentDeleting.name}} {{currentDeleting.email}}?
+                            </h3>
                         </div>
                         <div class="modal-footer">
                           <button
@@ -78,8 +80,7 @@
                             Return
                           </button>
                           <button
-                            @click="clickDeleteHandler"
-                            type="button"
+                            
                             class="btn btn-danger"
                           >
                             Delete
@@ -123,10 +124,7 @@
             </tbody>
           </table>
         </div>
-        
-        <div class="col-md-12" v-if="!users">
-          <h1 class="display-1">You're not authenticated!</h1>
-        </div>
+
       </div>
     </div>
   </div>
@@ -152,6 +150,11 @@ export default {
             mobile: '',
             createdAt: '',
             updatedAt: '',
+      },
+      currentDeleting: {
+        id: null,
+        name: null,
+        email: null
       }
     };
   },
@@ -165,12 +168,18 @@ export default {
         this.currentUser.updatedAt = user.updatedAt
         console.log(this.currentUser)
     },
-    clickDeleteHandler() {
-      console.log("deleting... ");
+    clickDeleteHandler(id) {
+      console.log(id);
       this.$router.push("/index");
     },   
+    setDeleting(id,name,email){
+      this.currentDeleting.id = id
+      this.currentDeleting.name = name
+      this.currentDeleting.email = email
+      console.log(this.currentDeleting)
+    }
   },
-  async mounted() {
+  async beforeCreate() {
     try {
       const response = await axios.get("clientes", {
         headers: {
@@ -179,6 +188,7 @@ export default {
       });
       this.users = response.data[0]
     } catch (err) {
+      this.$router.push("/login");
       console.log(err)
     }
   }
@@ -187,7 +197,7 @@ export default {
 
 <style scoped>
 .rep:hover{
-    background-color: rgb(217, 255, 202);
+    background-color: #b5ebf3;
 
 }
 </style>

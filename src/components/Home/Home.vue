@@ -3,7 +3,7 @@
     <NavBar />
     <div class="container">
       <div>
-        <img src="../../assets/tikal_tech_logotypeName.webp" alt="Tikal Name" />
+        <img src="../../assets/tikal_tech_logotypeName.webp" alt="Tikal Name" class="mt-4" />
       </div>
       <div>
         <router-link to="/login" class="btn btn-secondary actionButtons">Login</router-link>
@@ -64,12 +64,13 @@ export default {
 
 <style scoped>
 .backgroundHome {
-  background-image: url(../../assets/tikal_tech_homeBackground.webp);
+  background-image: url(../../assets/tikal_tech_homeBackground.webp) ; 
   height: 100vh;
 }
 .container {
   width: 70%;
   min-height: 70%;
+  min-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,8 +80,9 @@ export default {
   margin-bottom: 30px;
 }
 .actionButtons{
+  flex-wrap: nowrap;
   min-width: 150px;
-  min-height: 50px;
+  min-height: 50%;
   margin-right: 10px;
 }
 .carousel-item {
