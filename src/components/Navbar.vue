@@ -21,25 +21,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="form-inline navbar-nav ml-auto mr-4" v-if="!users">
         <li class="nav-item active">
-          <router-link to="/" class="nav-link text-white" 
-            >Home <span class="sr-only">(current)</span></router-link
-          >
+          <router-link to="/" class="nav-link text-white"
+            ><div class="link"><i class="bi bi-house-door"></i> Home</div>
+          </router-link>
         </li>
         <li class="nav-item mr-sm-2">
-          <router-link to="/login" class="nav-link text-white" 
-            >Login</router-link
+          <router-link to="/login" class="nav-link text-white"
+            ><div class="link">
+              <i class="bi bi-box-arrow-in-right"></i> Login
+            </div></router-link
           >
         </li>
       </ul>
       <ul class="form-inline navbar-nav ml-auto mr-4" v-if="users">
         <li class="nav-item">
-          <router-link to="/index" class="nav-link text-white"
-            >Operações <span class="sr-only">(current)</span></router-link
-          >
-        </li>
-        <li class="nav-item">
-          <a @click="handleClick" href="javascript:void(0)" class="nav-link text-white"
-            >Logout <span class="sr-only">(current)</span></a
+          <a
+            @click="clickLogoutHandle"
+            href="javascript:void(0)"
+            class="nav-link text-white"
+            ><div class="link"><i class="bi bi-door-closed"></i> Logout</div></a
           >
         </li>
       </ul>
@@ -49,19 +49,28 @@
 
 <script>
 /* eslint-disable */
+import axios from "axios";
 export default {
   name: "NavBar",
-  props: ['users'],
+  props: ["users"],
   methods: {
-    handleClick(){
-      localStorage.removeItem('token')
-      this.$router.push('/')
-    }
-  }
+    async clickLogoutHandle() {
+      const response = await axios.post("logout", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      });
+      localStorage.removeItem("token");
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 
 <style scoped>
+.link:hover {
+  color: #17a2b8;
+}
 .navbarLogo {
   width: 30px;
 }

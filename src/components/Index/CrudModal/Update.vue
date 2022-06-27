@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit="submitUpdateHandler">
+    <form>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="name">Name</label>
@@ -54,18 +54,20 @@
           />
         </div>
       </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">
-        Return
-      </button>
-      <button class="btn btn-warning">Update</button>
-    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Return
+        </button>
+        <button class="btn btn-warning" @click="submitUpdateHandler">
+          Update
+        </button>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "UpdateForm",
   props: {
@@ -74,40 +76,38 @@ export default {
   data() {
     return {
       dataToUpdateForm: {
-        id: '',
-        name: '',
-        email: '',
-        mobile: '',
-        createdAt: '',
-        updatedAt: '',
+        id: "",
+        name: "",
+        email: "",
+        mobile: "",
+        createdAt: "",
+        updatedAt: "",
       },
     };
   },
   methods: {
-    async submitUpdateHandler(){
+    async submitUpdateHandler() {
+      console.log("aqui");
       const data = {
         id: this.dataToUpdate.id,
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        mobile: document.getElementById('mobile').value,
-      }
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        mobile: document.getElementById("mobile").value,
+      };
       try {
         const response = await axios.put(`clientes/${data.id}`, data, {
           headers: {
-            "x-access-token": localStorage.getItem("token")
-          }
-        })     
-        console.log(response)
-        this.$router.push("/index");
+            "x-access-token": localStorage.getItem("token"),
+          },
+        });
+        console.log(response);
+        location.reload();
       } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
       }
-
-    }
-  }
-
-  }
-
+    },
+  },
+};
 </script>
 
 <style scoped></style>

@@ -3,11 +3,19 @@
     <NavBar />
     <div class="container">
       <div>
-        <img src="../../assets/tikal_tech_logotypeName.webp" alt="Tikal Name" class="mt-4" />
+        <img
+          src="../../assets/tikal_tech_logotypeName.webp"
+          alt="Tikal Name"
+          class="mt-4"
+        />
       </div>
       <div>
-        <router-link to="/login" class="btn btn-secondary actionButtons">Login</router-link>
-        <a href="https://www.tikal.tech" class="btn btn-info actionButtons">Conheça-nos mais </a>
+        <router-link to="/login" class="btn btn-secondary actionButtons"
+          >Login</router-link
+        >
+        <a href="https://www.tikal.tech" class="btn btn-info actionButtons"
+          >More...
+        </a>
       </div>
 
       <div
@@ -16,15 +24,15 @@
         data-ride="carousel"
       >
         <div class="carousel-inner">
-          <div class="carousel-item active">
+          <div class="carousel-item active" data-interval="2000">
             <h3>Solidez</h3>
             <p>Pioneirismo, Confiabilidade, Estruturação, Low Profile</p>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" data-interval="2000">
             <h3>Assertividade</h3>
             <p>Agilidade, Minúcia, Direto ao ponto</p>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" data-interval="2000">
             <h3>Disrupção</h3>
             <p>Inovação, Novos paradigmas, Trends</p>
           </div>
@@ -53,18 +61,18 @@
 </template>
 <script>
 /* eslint-disable */
-import NavBar from '../NavBar'
+import NavBar from "../NavBar";
 export default {
   name: "Home",
   components: {
-    NavBar
-  }
+    NavBar,
+  },
 };
 </script>
 
 <style scoped>
 .backgroundHome {
-  background-image: url(../../assets/tikal_tech_homeBackground.webp) ; 
+  background-image: url(../../assets/tikal_tech_homeBackground.webp);
   height: 100vh;
 }
 .container {
@@ -79,7 +87,7 @@ export default {
 .container > div {
   margin-bottom: 30px;
 }
-.actionButtons{
+.actionButtons {
   flex-wrap: nowrap;
   min-width: 150px;
   min-height: 50%;

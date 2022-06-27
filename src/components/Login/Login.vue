@@ -8,13 +8,20 @@
             <div class="d-flex align-items-center p-5 m-4">
               <form @submit.prevent="handleSubmit" class="loginForm">
                 <div class="text-center mb-2">
-                  <img src="../../../public/tikal_tech_logotype.webp" alt="Tikal logotype">
+                  <img
+                    src="../../../public/tikal_tech_logotype.webp"
+                    alt="Tikal logotype"
+                  />
                 </div>
-                <h3 class="fw-normal mb-2 pb-3 text-center" style="letter-spacing: 1px">
+                <h3
+                  class="fw-normal mb-2 pb-3 text-center"
+                  style="letter-spacing: 1px"
+                >
                   Welcome back
                 </h3>
                 <p class="text-center mb-4">
-                  To connect to your account fill the form with valid email and password!
+                  To connect to your account fill the form with valid email and
+                  password!
                 </p>
                 <LoginError v-if="err" :err="err" />
                 <div class="form-outline mb-4">
@@ -31,7 +38,7 @@
                       />
                     </div>
                   </div>
-                    <label class="form-label" for="form2Example18">User </label>
+                  <label class="form-label" for="form2Example18">User </label>
                 </div>
 
                 <div class="form-outline mb-4">
@@ -48,9 +55,9 @@
                       />
                     </div>
                   </div>
-                    <label class="form-label" for="form2Example28"
-                      >Password</label
-                    >
+                  <label class="form-label" for="form2Example28"
+                    >Password</label
+                  >
                 </div>
 
                 <div class="pt-1 mb-4">
@@ -120,9 +127,13 @@ export default {
 * {
   overflow: hidden;
 }
-section{
-  background: rgb(255,255,255);
-background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(179, 179, 179, 0.8) 100%);
+section {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(179, 179, 179, 0.8) 100%
+  );
 }
 input[type="text"] {
   text-align: left;
