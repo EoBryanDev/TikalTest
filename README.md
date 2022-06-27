@@ -2,7 +2,7 @@
 
 Neste projeto utilizei o framework JS "Vue3" e o framework Bootstrap v4.6 para realizar o trabalho com o frontend. Decidi ao construir o layout do projeto tomar a liberdade de recuperar alguns elementos da jurisTech como background do site oficial, logotipo e logomarca para deixar o projeto direcionado à companhia.
 
-## Teste 1 - Interface de Leitura
+## Teste - Interface de Leitura
 
 * O começo do projeto foi em realizar a estrutura de componentes para que a navegação do cliente fosse o mais fluída possível e agradável. Para isso construi uma página home que seria a raíz, que seria acessada pelo usuário assim que acessasse a página. Ela conta com um componente de navegação (uma barra de navegação) e uma interface com botões que direciona para a página de login e outro para a página oficial da companhia. Após isto foi realizado a pagina de login e depois a página de apresentação dos dados recuperado da API, ou seja, ela é privada.
 
